@@ -1,4 +1,4 @@
-function generateDocs() {
+function generateDocs(){
 
 const project =
 document.getElementById("project").value;
@@ -16,6 +16,7 @@ const description =
 document.getElementById("description").value;
 
 const readme =
+
 `# ${project}
 
 ## Overview
@@ -24,9 +25,11 @@ ${description}
 
 ## Token Information
 
-- Name: ${token}
-- Symbol: ${symbol}
-- Supply: ${supply}
+Name: ${token}
+
+Symbol: ${symbol}
+
+Supply: ${supply}
 
 ## Network
 
@@ -38,6 +41,7 @@ Coming Soon
 `;
 
 const whitepaper =
+
 `# ${project} Whitepaper
 
 ## Introduction
@@ -48,7 +52,7 @@ ${project} is a blockchain project built on EVOZ Mainnet.
 
 To build sustainable utility and ecosystem growth.
 
-## Token
+## Token Information
 
 Name: ${token}
 
@@ -56,12 +60,12 @@ Symbol: ${symbol}
 
 Supply: ${supply}
 
-## Use Cases
+## Utility
 
 Community
-Payments
 Rewards
-Utilities
+Payments
+Ecosystem Services
 
 ## Conclusion
 
@@ -69,34 +73,42 @@ ${project} aims to contribute to the EVOZ ecosystem.
 `;
 
 const roadmap =
+
 `# ${project} Roadmap
 
-Phase 1
+PHASE 1
+
 - Token Creation
 - Website Launch
-- Community Setup
+- Community Building
 
-Phase 2
-- Ecosystem Development
+PHASE 2
+
+- Utility Development
 - Partnerships
-- Utility Expansion
+- Ecosystem Expansion
 
-Phase 3
+PHASE 3
+
 - Product Launch
 - User Growth
-- Ecosystem Integration
+- Long Term Sustainability
 `;
 
 const tokenomics =
+
 `# ${project} Tokenomics
 
-Token Name:
+Token Name
+
 ${token}
 
-Symbol:
+Symbol
+
 ${symbol}
 
-Max Supply:
+Maximum Supply
+
 ${supply}
 
 Distribution
