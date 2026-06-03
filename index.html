@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>EVOZX Launch Kit</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
 
-<link rel="stylesheet" href="style.css">
+<title>EVOZX Launch Kit v0.3</title>
+
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
@@ -20,49 +23,135 @@
 
 <p>Create Your Token Project on EVOZ Mainnet</p>
 
-<input
-id="project"
+<input id="project"
 placeholder="Project Name">
 
-<input
-id="token"
+<input id="token"
 placeholder="Token Name">
 
-<input
-id="symbol"
-placeholder="Symbol">
+<input id="symbol"
+placeholder="Token Symbol">
 
-<input
-id="supply"
-placeholder="Supply">
+<input id="supply"
+placeholder="Max Supply">
 
-<textarea
-id="description"
+<textarea id="description"
 placeholder="Project Description"></textarea>
 
 <button onclick="generateDocs()">
 Generate
 </button>
 
+<section>
+
 <h2>README</h2>
+
+<button onclick="copyText('readme')">
+Copy
+</button>
+
+<button onclick="downloadText('readme','README.txt')">
+Export
+</button>
 
 <textarea id="readme"></textarea>
 
+</section>
+
+
+<section>
+
 <h2>WHITEPAPER</h2>
+
+<button onclick="copyText('whitepaper')">
+Copy
+</button>
+
+<button onclick="downloadText('whitepaper','WHITEPAPER.txt')">
+Export
+</button>
 
 <textarea id="whitepaper"></textarea>
 
+</section>
+
+
+<section>
+
 <h2>ROADMAP</h2>
+
+<button onclick="copyText('roadmap')">
+Copy
+</button>
+
+<button onclick="downloadText('roadmap','ROADMAP.txt')">
+Export
+</button>
 
 <textarea id="roadmap"></textarea>
 
+</section>
+
+
+<section>
+
 <h2>TOKENOMICS</h2>
 
+<button onclick="copyText('tokenomics')">
+Copy
+</button>
+
+<button onclick="downloadText('tokenomics','TOKENOMICS.txt')">
+Export
+</button>
+
 <textarea id="tokenomics"></textarea>
+
+</section>
+
+
+<section>
+
+<h2>SMART CONTRACT</h2>
+
+<button onclick="copyText('contract')">
+Copy
+</button>
+
+<textarea id="contract"></textarea>
+
+</section>
+
+
+<section>
+
+<h2>LOGO PROMPT</h2>
+
+<button onclick="copyText('logo')">
+Copy
+</button>
+
+<textarea id="logo"></textarea>
+
+</section>
+
+
+<section>
+
+<h2>SOCIAL BIO</h2>
+
+<button onclick="copyText('bio')">
+Copy
+</button>
+
+<textarea id="bio"></textarea>
+
+</section>
 
 </div>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
