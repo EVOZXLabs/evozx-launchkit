@@ -1,27 +1,52 @@
-function generateDocs(){
+function generateDocs() {
 
-let project =
+const project =
 document.getElementById("project").value;
 
-let token =
+const token =
 document.getElementById("token").value;
 
-let symbol =
+const symbol =
 document.getElementById("symbol").value;
 
-let supply =
+const supply =
 document.getElementById("supply").value;
 
-let description =
+const description =
 document.getElementById("description").value;
 
-let readme =
-
+const readme =
 `# ${project}
 
 ## Overview
 
 ${description}
+
+## Token Information
+
+- Name: ${token}
+- Symbol: ${symbol}
+- Supply: ${supply}
+
+## Network
+
+EVOZ Mainnet
+
+## Website
+
+Coming Soon
+`;
+
+const whitepaper =
+`# ${project} Whitepaper
+
+## Introduction
+
+${project} is a blockchain project built on EVOZ Mainnet.
+
+## Vision
+
+To build sustainable utility and ecosystem growth.
 
 ## Token
 
@@ -31,23 +56,70 @@ Symbol: ${symbol}
 
 Supply: ${supply}
 
-## Network
+## Use Cases
 
-EVOZ Mainnet
+Community
+Payments
+Rewards
+Utilities
 
-## Roadmap
+## Conclusion
 
-Phase 1
-- Launch
-
-Phase 2
-- Community
-
-Phase 3
-- Ecosystem
+${project} aims to contribute to the EVOZ ecosystem.
 `;
 
-document.getElementById("output")
-.value = readme;
+const roadmap =
+`# ${project} Roadmap
+
+Phase 1
+- Token Creation
+- Website Launch
+- Community Setup
+
+Phase 2
+- Ecosystem Development
+- Partnerships
+- Utility Expansion
+
+Phase 3
+- Product Launch
+- User Growth
+- Ecosystem Integration
+`;
+
+const tokenomics =
+`# ${project} Tokenomics
+
+Token Name:
+${token}
+
+Symbol:
+${symbol}
+
+Max Supply:
+${supply}
+
+Distribution
+
+50% Community
+
+20% Ecosystem
+
+20% Development
+
+10% Marketing
+`;
+
+document.getElementById("readme").value =
+readme;
+
+document.getElementById("whitepaper").value =
+whitepaper;
+
+document.getElementById("roadmap").value =
+roadmap;
+
+document.getElementById("tokenomics").value =
+tokenomics;
 
 }
