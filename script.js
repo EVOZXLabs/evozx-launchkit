@@ -1,233 +1,212 @@
 function generateDocs(){
 
-const project =
-document.getElementById("project").value.trim();
+const project=
+document.getElementById(
+"project"
+).value;
 
-const token =
-document.getElementById("token").value.trim();
+const token=
+document.getElementById(
+"token"
+).value;
 
-const symbol =
-document.getElementById("symbol").value.trim();
+const symbol=
+document.getElementById(
+"symbol"
+).value;
 
-const supply =
-document.getElementById("supply").value.trim();
+const supply=
+document.getElementById(
+"supply"
+).value;
 
-const description =
-document.getElementById("description").value.trim();
+const description=
+document.getElementById(
+"description"
+).value;
 
 
-if(
-!project||
-!token||
-!symbol||
-!supply
-){
+const html=
 
-alert(
-"Please fill all fields"
-);
+`<!DOCTYPE html>
 
-return;
+<html>
 
-}
+<head>
 
+<title>${project}</title>
 
-const readme =
+<link rel="stylesheet"
+href="style.css">
 
-`# ${project}
+</head>
 
-Overview
+<body>
 
-${description}
+<section class="hero">
 
-Token
+<h1>${project}</h1>
 
-Name: ${token}
+<p>${description}</p>
 
-Symbol: ${symbol}
+<button>
 
-Supply: ${supply}
+BUY ${symbol}
 
-Network
+</button>
 
-EVOZ Mainnet
+</section>
 
-Website
 
-Coming Soon
-`;
+<section>
 
+<h2>About</h2>
 
-const whitepaper =
+<p>
 
-`# ${project} Whitepaper
+${project}
+built on EVOZ Mainnet
 
-Introduction
+</p>
 
-${project} is built on EVOZ Mainnet.
+</section>
 
-Vision
 
-Create utility and sustainable growth.
+<section>
 
-Utilities
+<h2>Token Info</h2>
 
-Community Rewards
-
-Payments
-
-Ecosystem Services
-
-Conclusion
-
-Building long term ecosystem value.
-`;
-
-
-const roadmap =
-
-`PHASE 1
-
-• Token Creation
-
-• Community Building
-
-• Launch Website
-
-
-PHASE 2
-
-• Partnerships
-
-• Utility Development
-
-• Growth Campaign
-
-
-PHASE 3
-
-• Product Expansion
-
-• User Acquisition
-
-• Ecosystem Scaling
-`;
-
-
-const tokenomics =
-
-`TOKENOMICS
-
-50% Community
-
-20% Ecosystem
-
-20% Development
-
-10% Marketing
-
-Supply:
-
-${supply}
-`;
-
-
-const contract =
-
-`pragma solidity ^0.8.20;
-
-contract ${symbol}Token {
-
-string public name =
-"${token}";
-
-string public symbol =
-"${symbol}";
-
-uint public totalSupply =
-${supply};
-
-address public owner;
-
-constructor(){
-
-owner=msg.sender;
-
-}
-
-}
-`;
-
-
-const logo =
-
-`Create a futuristic crypto logo for ${project}.
-
-Theme:
-
-dark blockchain
-
-modern technology
-
-glowing elements
-
-token symbol ${symbol}
-
-professional launch ready branding
-
-high quality vector style
-`;
-
-
-const bio =
-
-`${project}
-
-Building on EVOZ Mainnet.
+<p>
 
 Token:
 
 ${token}
 
-Symbol:
+</p>
 
-${symbol}
+<p>
 
-Community driven ecosystem.
+Supply:
+
+${supply}
+
+</p>
+
+</section>
+
+
+<section>
+
+<h2>Utility</h2>
+
+<ul>
+
+<li>Community</li>
+
+<li>Payments</li>
+
+<li>Ecosystem</li>
+
+</ul>
+
+</section>
+
+
+<section>
+
+<h2>Roadmap</h2>
+
+<p>
+
+Launch
+
+Growth
+
+Expansion
+
+</p>
+
+</section>
+
+
+<section>
+
+<h2>FAQ</h2>
+
+<p>
+
+What is ${project}?
+
+Blockchain project.
+
+</p>
+
+</section>
+
+</body>
+
+</html>
 `;
 
 
+const css=
 
-document.getElementById(
-"readme"
-).value=readme;
+`
+body{
 
-document.getElementById(
-"whitepaper"
-).value=whitepaper;
+font-family:Arial;
 
-document.getElementById(
-"roadmap"
-).value=roadmap;
+margin:0;
 
-document.getElementById(
-"tokenomics"
-).value=tokenomics;
+background:#0a1022;
 
-document.getElementById(
-"contract"
-).value=contract;
-
-document.getElementById(
-"logo"
-).value=logo;
-
-document.getElementById(
-"bio"
-).value=bio;
+color:white;
 
 }
 
+.hero{
+
+padding:120px 20px;
+
+text-align:center;
+
+}
+
+section{
+
+padding:50px 20px;
+
+max-width:900px;
+
+margin:auto;
+
+}
+
+button{
+
+padding:15px 30px;
+
+font-size:18px;
+
+}
+
+`;
+
+document.getElementById(
+"landinghtml"
+).value=html;
+
+document.getElementById(
+"landingcss"
+).value=css;
+
+document.getElementById(
+"preview"
+).srcdoc=
+
+`<style>${css}</style>${html}`;
+
+}
 
 
 function copyText(id){
@@ -241,12 +220,7 @@ document.execCommand(
 "copy"
 );
 
-alert(
-"Copied"
-);
-
 }
-
 
 
 function downloadText(id,file){
@@ -256,8 +230,7 @@ document.getElementById(id).value;
 
 const blob=
 new Blob(
-[text],
-{type:"text/plain"}
+[text]
 );
 
 const a=
@@ -266,7 +239,9 @@ document.createElement(
 );
 
 a.href=
-URL.createObjectURL(blob);
+URL.createObjectURL(
+blob
+);
 
 a.download=file;
 
