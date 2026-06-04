@@ -10,23 +10,33 @@ async function deployToken() {
         }
 
         const name =
-            document.getElementById("tokenName")
-            .value
-            .trim();
+            document
+                .getElementById("tokenName")
+                .value
+                .trim();
 
         const symbol =
-            document.getElementById("tokenSymbol")
-            .value
-            .trim();
+            document
+                .getElementById("tokenSymbol")
+                .value
+                .trim();
 
         const supply =
-            document.getElementById("tokenSupply")
-            .value
-            .trim();
+            document
+                .getElementById("tokenSupply")
+                .value
+                .trim();
 
-        if (!name || !symbol || !supply) {
+        if (
+            !name ||
+            !symbol ||
+            !supply
+        ) {
 
-            alert("Isi semua field terlebih dahulu");
+            alert(
+                "Isi semua field terlebih dahulu"
+            );
+
             return;
 
         }
@@ -72,7 +82,10 @@ async function deployToken() {
         let tokenAddress =
             null;
 
-        for (const log of receipt.logs) {
+        for (
+            const log
+            of receipt.logs
+        ) {
 
             try {
 
@@ -111,12 +124,18 @@ async function deployToken() {
         const deployment = {
 
             tokenAddress,
+
             txHash:
                 receipt.transactionHash,
+
             creator,
+
             name,
+
             symbol,
+
             supply,
+
             timestamp:
                 Date.now()
 
@@ -127,7 +146,9 @@ async function deployToken() {
         );
 
         renderDeployments();
+
         loadMyTokens();
+
         loadFactoryStats();
 
         document.getElementById(
@@ -138,11 +159,16 @@ async function deployToken() {
         const verificationData = {
 
             tokenAddress,
+
             txHash:
                 receipt.transactionHash,
+
             creator,
+
             name,
+
             symbol,
+
             supply
 
         };
@@ -170,7 +196,9 @@ async function deployToken() {
 
             <br><br>
 
-            <a href="${CONFIG.EXPLORER_URL}/address/${tokenAddress}" target="_blank">
+            <a
+                href="${CONFIG.EXPLORER_URL}/address/${tokenAddress}"
+                target="_blank">
                 View Explorer
             </a>
 
@@ -210,7 +238,9 @@ function copyTokenAddress(
         address
     );
 
-    alert("Address copied");
+    alert(
+        "Address copied"
+    );
 
 }
 
@@ -317,7 +347,10 @@ function renderDeployments() {
 
     container.innerHTML =
         deployments.map(
-            token => `
+
+            token =>
+
+            `
             <div>
 
                 <b>${token.name}</b>
@@ -329,14 +362,19 @@ function renderDeployments() {
 
                 <br>
 
-                <a href="${CONFIG.EXPLORER_URL}/address/${token.tokenAddress}" target="_blank">
+                <a
+                    href="${CONFIG.EXPLORER_URL}/address/${token.tokenAddress}"
+                    target="_blank">
+
                     Explorer
+
                 </a>
 
             </div>
 
             <hr>
             `
+
         ).join("");
 
 }
@@ -369,6 +407,7 @@ async function loadFactoryStats() {
             await factory.totalTokens();
 
         stats.innerHTML =
+
             `
             Total Tokens Created:
             <b>${total.toString()}</b>
@@ -409,11 +448,14 @@ function loadMyTokens() {
 
     const mine =
         deployments.filter(
-            d =>
-                d.creator
-                .toLowerCase() ===
+
+            deployment =>
+
+                deployment.creator
+                    .toLowerCase() ===
                 currentAccount
-                .toLowerCase()
+                    .toLowerCase()
+
         );
 
     if (!mine.length) {
@@ -427,7 +469,10 @@ function loadMyTokens() {
 
     container.innerHTML =
         mine.map(
-            token => `
+
+            token =>
+
+            `
             <div>
 
                 <b>${token.name}</b>
@@ -439,14 +484,19 @@ function loadMyTokens() {
 
                 <br>
 
-                <a href="${CONFIG.EXPLORER_URL}/address/${token.tokenAddress}" target="_blank">
+                <a
+                    href="${CONFIG.EXPLORER_URL}/address/${token.tokenAddress}"
+                    target="_blank">
+
                     View
+
                 </a>
 
             </div>
 
             <hr>
             `
+
         ).join("");
 
 }
@@ -458,8 +508,8 @@ async function downloadVerificationPackage(
     const zip =
         new JSZip();
 
-    zip.file(
-        "verify-info.txt",
+    const verifyInfo =
+
 `TOKEN ADDRESS
 ${data.tokenAddress}
 
@@ -477,12 +527,73 @@ ${data.symbol}
 
 SUPPLY
 ${data.supply}
-`
+
+COMPILER
+0.8.24
+
+OPTIMIZER
+Enabled
+
+RUNS
+200
+
+EVM VERSION
+Paris
+`;
+
+    const compilerSettings = {
+
+        compilerVersion:
+            "0.8.24",
+
+        optimizer: {
+
+            enabled: true,
+
+            runs: 200
+
+        },
+
+        evmVersion:
+            "paris"
+
+    };
+
+    const constructorArguments =
+
+`name_ = ${data.name}
+
+symbol_ = ${data.symbol}
+
+supply_ = ${data.supply}
+
+creator_ = ${data.creator}`;
+
+    zip.file(
+        "verify-info.txt",
+        verifyInfo
+    );
+
+    zip.file(
+        "compiler-settings.json",
+        JSON.stringify(
+            compilerSettings,
+            null,
+            2
+        )
+    );
+
+    zip.file(
+        "constructor-arguments.txt",
+        constructorArguments
     );
 
     const blob =
         await zip.generateAsync({
-            type: "blob"
+
+            type:
+                "blob"
+
         });
 
     const link =
@@ -515,7 +626,9 @@ window.addEventListener(
     () => {
 
         renderDeployments();
+
         loadFactoryStats();
+
         loadMyTokens();
 
     }
