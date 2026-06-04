@@ -19,6 +19,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
 </head>
 
 <body>
@@ -70,10 +72,6 @@
                 Connect Wallet
             </button>
 
-            <div id="networkStatus">
-                Checking Network...
-            </div>
-
         </section>
 
         <section class="card">
@@ -104,11 +102,26 @@
 
         </section>
 
+        <section class="card info-card">
+
+            <div class="network-badge">
+                Network: EVOZ Mainnet
+            </div>
+
+            <div class="support-text">
+                Supported by EVOZX
+            </div>
+
+        </section>
+
     </div>
 
     <script src="js/config.js"></script>
+
     <script src="js/wallet.js"></script>
+
     <script src="js/deploy.js"></script>
+
     <script src="js/app.js"></script>
 
 </body>
