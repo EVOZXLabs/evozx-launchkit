@@ -130,10 +130,10 @@ async function deployToken() {
             <br><br>
 
             <a
-            href="${CONFIG.EXPLORER_URL}/address/${tokenAddress}"
-            target="_blank">
+                href="${CONFIG.EXPLORER_URL}/address/${tokenAddress}"
+                target="_blank">
 
-            View on Explorer
+                View on Explorer
 
             </a>
             `;
@@ -149,4 +149,4 @@ async function deployToken() {
 
     }
 
-                }
+}
