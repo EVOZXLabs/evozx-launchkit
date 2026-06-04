@@ -326,3 +326,20 @@ hr {
     }
 
 }
+
+.main-logo {
+
+    width: 220px;
+
+    max-width: 90%;
+
+    height: auto;
+
+    margin-bottom: 15px;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(56,189,248,.5)
+        );
+}
