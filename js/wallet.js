@@ -2,45 +2,12 @@ let provider;
 let signer;
 let currentAccount;
 
-function shortenAddress(address) {
-
-    return (
-        address.substring(0, 6) +
-        "..." +
-        address.substring(
-            address.length - 4
-        )
-    );
-
-}
-
-function updateConnectButton(address) {
-
-    const btn =
-        document.getElementById(
-            "connectBtn"
-        );
-
-    btn.innerText =
-        shortenAddress(address);
-
-}
-
-function resetConnectButton() {
-
-    document.getElementById(
-        "connectBtn"
-    ).innerText =
-        "Connect Wallet";
-
-}
-
 async function connectWallet() {
 
     if (!window.ethereum) {
 
         alert(
-            "Wallet EVM tidak terdeteksi.\n\nBuka website ini melalui browser wallet seperti TokenPocket, OKX Wallet, Bitget Wallet, Rabby atau MetaMask."
+            "Wallet EVM tidak terdeteksi.\n\nGunakan TokenPocket, OKX Wallet, Bitget Wallet, Rabby atau MetaMask."
         );
 
         return;
@@ -49,63 +16,18 @@ async function connectWallet() {
 
     try {
 
-        await switchToEvoz();
-
-        const currentChain =
-            await window.ethereum.request({
-                method: "eth_chainId"
-            });
-
-        const targetChain =
-            "0x" +
-            CONFIG.CHAIN_ID.toString(16);
-
-        if (
-            currentChain.toLowerCase() !==
-            targetChain.toLowerCase()
-        ) {
-
-            alert(
-                "Silakan pindah ke EVOZ Mainnet terlebih dahulu."
-            );
-
-            return;
-
-        }
-
-        provider =
-            new ethers.providers.Web3Provider(
-                window.ethereum
-            );
-
         await provider.send(
             "eth_requestAccounts",
             []
         );
 
-        signer =
-            provider.getSigner();
+        await switchToEvoz();
 
-        currentAccount =
-            await signer.getAddress();
-
-        document.getElementById(
-            "walletAddress"
-        ).innerText =
-            currentAccount;
-
-        updateConnectButton(
-            currentAccount
-        );
+        await updateWalletInfo();
 
     } catch (error) {
 
         console.error(error);
-
-        document.getElementById(
-            "walletAddress"
-        ).innerText =
-            "Connection Failed";
 
     }
 
@@ -137,55 +59,124 @@ async function switchToEvoz() {
 
         if (error.code === 4902) {
 
-            try {
+            await window.ethereum.request({
 
-                await window.ethereum.request({
+                method:
+                    "wallet_addEthereumChain",
 
-                    method:
-                        "wallet_addEthereumChain",
+                params: [
 
-                    params: [
+                    {
 
-                        {
+                        chainId:
+                            chainHex,
 
-                            chainId:
-                                chainHex,
+                        chainName:
+                            CONFIG.CHAIN_NAME,
 
-                            chainName:
-                                CONFIG.CHAIN_NAME,
+                        nativeCurrency: {
 
-                            nativeCurrency: {
+                            name:
+                                CONFIG.CURRENCY_SYMBOL,
 
-                                name:
-                                    CONFIG.CURRENCY_SYMBOL,
+                            symbol:
+                                CONFIG.CURRENCY_SYMBOL,
 
-                                symbol:
-                                    CONFIG.CURRENCY_SYMBOL,
+                            decimals:
+                                18
 
-                                decimals:
-                                    18
+                        },
 
-                            },
+                        rpcUrls: [
+                            CONFIG.RPC_URL
+                        ],
 
-                            rpcUrls: [
-                                CONFIG.RPC_URL
-                            ],
+                        blockExplorerUrls: [
+                            CONFIG.EXPLORER_URL
+                        ]
 
-                            blockExplorerUrls: [
-                                CONFIG.EXPLORER_URL
-                            ]
+                    }
 
-                        }
+                ]
 
-                    ]
+            });
 
-                });
+        }
 
-            } catch (addError) {
+    }
 
-                console.error(addError);
+}
 
-            }
+function shortenAddress(address) {
+
+    return (
+        address.substring(0, 6) +
+        "..." +
+        address.substring(
+            address.length - 4
+        )
+    );
+
+}
+
+async function updateWalletInfo() {
+
+    provider =
+        new ethers.providers.Web3Provider(
+            window.ethereum
+        );
+
+    const accounts =
+        await provider.listAccounts();
+
+    if (accounts.length === 0) {
+
+        document.getElementById(
+            "walletAddress"
+        ).innerText =
+            "Wallet not connected";
+
+        return;
+
+    }
+
+    currentAccount =
+        accounts[0];
+
+    signer =
+        provider.getSigner();
+
+    document.getElementById(
+        "walletAddress"
+    ).innerText =
+        shortenAddress(
+            currentAccount
+        );
+
+    const chainId =
+        await window.ethereum.request({
+            method: "eth_chainId"
+        });
+
+    const networkDiv =
+        document.getElementById(
+            "networkStatus"
+        );
+
+    if (networkDiv) {
+
+        if (
+            parseInt(chainId, 16) ===
+            CONFIG.CHAIN_ID
+        ) {
+
+            networkDiv.innerText =
+                "Network: EVOZ Mainnet";
+
+        } else {
+
+            networkDiv.innerText =
+                "Network: Wrong Network";
 
         }
 
@@ -201,29 +192,7 @@ async function checkConnection() {
 
     try {
 
-        provider =
-            new ethers.providers.Web3Provider(
-                window.ethereum
-            );
-
-        const accounts =
-            await provider.listAccounts();
-
-        if (accounts.length > 0) {
-
-            currentAccount =
-                accounts[0];
-
-            document.getElementById(
-                "walletAddress"
-            ).innerText =
-                currentAccount;
-
-            updateConnectButton(
-                currentAccount
-            );
-
-        }
+        await updateWalletInfo();
 
     } catch (error) {
 
@@ -242,32 +211,9 @@ if (window.ethereum) {
 
     window.ethereum.on(
         "accountsChanged",
-        function(accounts) {
+        function() {
 
-            if (accounts.length > 0) {
-
-                currentAccount =
-                    accounts[0];
-
-                document.getElementById(
-                    "walletAddress"
-                ).innerText =
-                    currentAccount;
-
-                updateConnectButton(
-                    currentAccount
-                );
-
-            } else {
-
-                document.getElementById(
-                    "walletAddress"
-                ).innerText =
-                    "Wallet not connected";
-
-                resetConnectButton();
-
-            }
+            updateWalletInfo();
 
         }
     );
@@ -276,7 +222,7 @@ if (window.ethereum) {
         "chainChanged",
         function() {
 
-            window.location.reload();
+            updateWalletInfo();
 
         }
     );
