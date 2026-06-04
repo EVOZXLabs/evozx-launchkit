@@ -4,26 +4,35 @@ async function deployToken() {
 
         if (!window.ethereum) {
 
-            alert("Wallet tidak terdeteksi");
+            alert(
+                "Wallet tidak terdeteksi"
+            );
+
             return;
 
         }
 
         const name =
             document
-            .getElementById("tokenName")
+            .getElementById(
+                "tokenName"
+            )
             .value
             .trim();
 
         const symbol =
             document
-            .getElementById("tokenSymbol")
+            .getElementById(
+                "tokenSymbol"
+            )
             .value
             .trim();
 
         const supply =
             document
-            .getElementById("tokenSupply")
+            .getElementById(
+                "tokenSupply"
+            )
             .value
             .trim();
 
@@ -79,14 +88,13 @@ async function deployToken() {
         const receipt =
             await tx.wait();
 
-        document.getElementById(
-            "deployStatus"
-        ).innerText =
-            "Token deployed successfully";
+        let tokenAddress =
+            null;
 
-        let tokenAddress = null;
-
-        for (const log of receipt.logs) {
+        for (
+            const log
+            of receipt.logs
+        ) {
 
             try {
 
@@ -114,13 +122,30 @@ async function deployToken() {
         if (!tokenAddress) {
 
             document.getElementById(
-                "tokenResult"
-            ).innerHTML =
-                "Token address not found.";
+                "deployStatus"
+            ).innerText =
+                "Deploy success but token address not found";
 
             return;
 
         }
+
+        saveDeployment({
+
+            tokenAddress,
+            txHash:
+                receipt.transactionHash,
+            creator,
+            name,
+            symbol,
+            supply
+
+        });
+
+        document.getElementById(
+            "deployStatus"
+        ).innerText =
+            "Token deployed successfully";
 
         const verificationData = {
 
@@ -139,18 +164,22 @@ async function deployToken() {
         ).innerHTML =
 
             `
-            <b>Token Address</b><br>
+            <b>Token Address</b>
+            <br>
             ${tokenAddress}
 
             <br><br>
 
-            <b>TX Hash</b><br>
+            <b>TX Hash</b>
+            <br>
             ${receipt.transactionHash}
 
             <br><br>
 
             <button onclick="copyTokenAddress('${tokenAddress}')">
+
                 Copy Address
+
             </button>
 
             <br><br>
@@ -165,9 +194,22 @@ async function deployToken() {
 
             <br><br>
 
-            <button onclick='downloadVerificationPackage(${JSON.stringify(
-                verificationData
-            )})'>
+            <button onclick="addTokenToWallet(
+                '${tokenAddress}',
+                '${symbol}'
+            )">
+
+                Add Token To Wallet
+
+            </button>
+
+            <br><br>
+
+            <button onclick='downloadVerificationPackage(
+                ${JSON.stringify(
+                    verificationData
+                )}
+            )'>
 
                 Download Verification Package
 
@@ -187,7 +229,9 @@ async function deployToken() {
 
 }
 
-function copyTokenAddress(address) {
+function copyTokenAddress(
+    address
+) {
 
     navigator.clipboard.writeText(
         address
@@ -199,7 +243,85 @@ function copyTokenAddress(address) {
 
 }
 
-async function downloadVerificationPackage(data) {
+async function addTokenToWallet(
+    tokenAddress,
+    tokenSymbol
+) {
+
+    try {
+
+        await window.ethereum.request({
+
+            method:
+                "wallet_watchAsset",
+
+            params: {
+
+                type:
+                    "ERC20",
+
+                options: {
+
+                    address:
+                        tokenAddress,
+
+                    symbol:
+                        tokenSymbol.substring(
+                            0,
+                            11
+                        ),
+
+                    decimals:
+                        18
+
+                }
+
+            }
+
+        });
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+    }
+
+}
+
+function saveDeployment(
+    deployment
+) {
+
+    let deployments =
+        JSON.parse(
+
+            localStorage.getItem(
+                "evozxDeployments"
+            )
+
+        ) || [];
+
+    deployments.unshift(
+        deployment
+    );
+
+    localStorage.setItem(
+
+        "evozxDeployments",
+
+        JSON.stringify(
+            deployments
+        )
+
+    );
+
+}
+
+async function downloadVerificationPackage(
+    data
+) {
 
     const zip =
         new JSZip();
@@ -245,6 +367,7 @@ Paris
         optimizer: {
 
             enabled: true,
+
             runs: 200
 
         },
@@ -254,12 +377,15 @@ Paris
 
     };
 
-    const constructorArgs =
+    const constructorArguments =
 
-`name_     = ${data.name}
-symbol_   = ${data.symbol}
-supply_   = ${data.supply}
-creator_  = ${data.creator}`;
+`name_ = ${data.name}
+
+symbol_ = ${data.symbol}
+
+supply_ = ${data.supply}
+
+creator_ = ${data.creator}`;
 
     zip.file(
         "verify-info.txt",
@@ -277,19 +403,26 @@ creator_  = ${data.creator}`;
 
     zip.file(
         "constructor-arguments.txt",
-        constructorArgs
+        constructorArguments
     );
 
     const blob =
         await zip.generateAsync({
-            type: "blob"
+
+            type:
+                "blob"
+
         });
 
     const link =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
     link.href =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
     link.download =
         `${data.symbol}-Verification.zip`;
