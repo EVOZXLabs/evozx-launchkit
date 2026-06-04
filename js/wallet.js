@@ -2,6 +2,39 @@ let provider;
 let signer;
 let currentAccount;
 
+function shortenAddress(address) {
+
+    return (
+        address.substring(0, 6) +
+        "..." +
+        address.substring(
+            address.length - 4
+        )
+    );
+
+}
+
+function updateConnectButton(address) {
+
+    const btn =
+        document.getElementById(
+            "connectBtn"
+        );
+
+    btn.innerText =
+        shortenAddress(address);
+
+}
+
+function resetConnectButton() {
+
+    document.getElementById(
+        "connectBtn"
+    ).innerText =
+        "Connect Wallet";
+
+}
+
 async function connectWallet() {
 
     if (!window.ethereum) {
@@ -33,7 +66,7 @@ async function connectWallet() {
         ) {
 
             alert(
-                "Jaringan belum berpindah ke EVOZ Mainnet.\n\nSilakan pindah manual ke EVOZ Mainnet lalu klik Connect Wallet lagi."
+                "Silakan pindah ke EVOZ Mainnet terlebih dahulu."
             );
 
             return;
@@ -60,6 +93,10 @@ async function connectWallet() {
             "walletAddress"
         ).innerText =
             currentAccount;
+
+        updateConnectButton(
+            currentAccount
+        );
 
     } catch (error) {
 
@@ -182,6 +219,10 @@ async function checkConnection() {
             ).innerText =
                 currentAccount;
 
+            updateConnectButton(
+                currentAccount
+            );
+
         }
 
     } catch (error) {
@@ -213,12 +254,18 @@ if (window.ethereum) {
                 ).innerText =
                     currentAccount;
 
+                updateConnectButton(
+                    currentAccount
+                );
+
             } else {
 
                 document.getElementById(
                     "walletAddress"
                 ).innerText =
                     "Wallet not connected";
+
+                resetConnectButton();
 
             }
 
