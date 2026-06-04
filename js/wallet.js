@@ -6,7 +6,10 @@ async function connectWallet() {
 
     if (!window.ethereum) {
 
-        alert("MetaMask tidak ditemukan");
+        alert(
+            "Wallet tidak terdeteksi.\n\nBuka website ini melalui browser wallet seperti TokenPocket, OKX Wallet, Bitget Wallet, Rabby atau MetaMask."
+        );
+
         return;
 
     }
