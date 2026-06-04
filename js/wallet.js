@@ -46,6 +46,10 @@ async function connectWallet() {
 
         console.error(error);
 
+        alert(
+            "Gagal menghubungkan wallet"
+        );
+
     }
 
 }
@@ -76,47 +80,55 @@ async function switchToEvoz() {
 
         if (error.code === 4902) {
 
-            await window.ethereum.request({
+            try {
 
-                method:
-                    "wallet_addEthereumChain",
+                await window.ethereum.request({
 
-                params: [
+                    method:
+                        "wallet_addEthereumChain",
 
-                    {
+                    params: [
 
-                        chainId:
-                            chainHex,
+                        {
 
-                        chainName:
-                            CONFIG.CHAIN_NAME,
+                            chainId:
+                                chainHex,
 
-                        nativeCurrency: {
+                            chainName:
+                                CONFIG.CHAIN_NAME,
 
-                            name:
-                                CONFIG.CURRENCY_SYMBOL,
+                            nativeCurrency: {
 
-                            symbol:
-                                CONFIG.CURRENCY_SYMBOL,
+                                name:
+                                    CONFIG.CURRENCY_SYMBOL,
 
-                            decimals:
-                                18
+                                symbol:
+                                    CONFIG.CURRENCY_SYMBOL,
 
-                        },
+                                decimals:
+                                    18
 
-                        rpcUrls: [
-                            CONFIG.RPC_URL
-                        ],
+                            },
 
-                        blockExplorerUrls: [
-                            CONFIG.EXPLORER_URL
-                        ]
+                            rpcUrls: [
+                                CONFIG.RPC_URL
+                            ],
 
-                    }
+                            blockExplorerUrls: [
+                                CONFIG.EXPLORER_URL
+                            ]
 
-                ]
+                        }
 
-            });
+                    ]
+
+                });
+
+            } catch (addError) {
+
+                console.error(addError);
+
+            }
 
         }
 
@@ -138,17 +150,23 @@ async function updateWalletInfo() {
     const accounts =
         await provider.listAccounts();
 
-    if (accounts.length === 0) {
-
+    const connectBtn =
         document.getElementById(
             "connectBtn"
-        ).innerText =
+        );
+
+    const networkDiv =
+        document.getElementById(
+            "networkStatus"
+        );
+
+    if (accounts.length === 0) {
+
+        connectBtn.innerText =
             "Connect Wallet";
 
-        document.getElementById(
-            "walletAddress"
-        ).innerText =
-            "Supported by EVOZX";
+        networkDiv.innerText =
+            "⚪ Wallet Not Connected";
 
         return;
 
@@ -160,17 +178,10 @@ async function updateWalletInfo() {
     signer =
         provider.getSigner();
 
-    document.getElementById(
-        "connectBtn"
-    ).innerText =
+    connectBtn.innerText =
         shortenAddress(
             currentAccount
         );
-
-    document.getElementById(
-        "walletAddress"
-    ).innerText =
-        "Supported by EVOZX";
 
     const chainId =
         await window.ethereum.request({
@@ -180,23 +191,18 @@ async function updateWalletInfo() {
 
         });
 
-    const networkDiv =
-        document.getElementById(
-            "networkStatus"
-        );
-
     if (
         parseInt(chainId, 16) ===
         CONFIG.CHAIN_ID
     ) {
 
         networkDiv.innerText =
-            "Network: EVOZ Mainnet";
+            "🟢 EVOZ Mainnet";
 
     } else {
 
         networkDiv.innerText =
-            "Network: Wrong Network";
+            "🔴 Wrong Network";
 
     }
 
