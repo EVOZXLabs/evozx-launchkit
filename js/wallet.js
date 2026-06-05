@@ -4,143 +4,151 @@ let currentAccount = null;
 
 function shortenAddress(address) {
 
-return (
-    address.substring(0, 6) +
-    "..." +
-    address.substring(
-        address.length - 4
-    )
-);
+    if (!address) {
+
+        return "";
+
+    }
+
+    return (
+        address.substring(0, 6) +
+        "..." +
+        address.substring(
+            address.length - 4
+        )
+    );
 
 }
 
 async function connectWallet() {
 
-if (!window.ethereum) {
+    if (!window.ethereum) {
 
-    alert(
-        "⚠️No EVM wallet detected.\n\nPlease use TokenPocket, OKX Wallet, Bitget Wallet, Rabby, or MetaMask."
-    );
-
-    return;
-
-}
-
-try {
-
-    provider =
-        new ethers.providers.Web3Provider(
-            window.ethereum
+        alert(
+            "No EVM wallet detected.\n\nPlease use TokenPocket, OKX Wallet, Bitget Wallet, Rabby, or MetaMask."
         );
 
-    await provider.send(
-        "eth_requestAccounts",
-        []
-    );
+        return;
 
-    await switchToEvoz();
+    }
 
-    await updateWalletInfo();
+    try {
 
-} catch (error) {
+        provider =
+            new ethers.providers.Web3Provider(
+                window.ethereum
+            );
 
-    console.error(
-        error
-    );
+        await provider.send(
+            "eth_requestAccounts",
+            []
+        );
 
-    alert(
-        "Failed to connect wallet."
-    );
+        await switchToEvoz();
 
-}
+        await updateWalletInfo();
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+        alert(
+            "Failed to connect wallet."
+        );
+
+    }
 
 }
 
 async function switchToEvoz() {
 
-const chainHex =
-    "0x" +
-    CONFIG.CHAIN_ID.toString(
-        16
-    );
+    const chainHex =
+        "0x" +
+        CONFIG.CHAIN_ID.toString(
+            16
+        );
 
-try {
+    try {
 
-    await window.ethereum.request({
+        await window.ethereum.request({
 
-        method:
-            "wallet_switchEthereumChain",
+            method:
+                "wallet_switchEthereumChain",
 
-        params: [
+            params: [
 
-            {
-                chainId:
-                    chainHex
+                {
+                    chainId:
+                        chainHex
+                }
+
+            ]
+
+        });
+
+    } catch (error) {
+
+        if (
+            error.code === 4902
+        ) {
+
+            try {
+
+                await window.ethereum.request({
+
+                    method:
+                        "wallet_addEthereumChain",
+
+                    params: [
+
+                        {
+
+                            chainId:
+                                chainHex,
+
+                            chainName:
+                                CONFIG.CHAIN_NAME,
+
+                            nativeCurrency: {
+
+                                name:
+                                    CONFIG.CURRENCY_SYMBOL,
+
+                                symbol:
+                                    CONFIG.CURRENCY_SYMBOL,
+
+                                decimals:
+                                    18
+
+                            },
+
+                            rpcUrls: [
+
+                                CONFIG.RPC_URL
+
+                            ],
+
+                            blockExplorerUrls: [
+
+                                CONFIG.EXPLORER_URL
+
+                            ]
+
+                        }
+
+                    ]
+
+                });
+
+            } catch (addError) {
+
+                console.error(
+                    addError
+                );
+
             }
-
-        ]
-
-    });
-
-} catch (error) {
-
-    if (
-        error.code === 4902
-    ) {
-
-        try {
-
-            await window.ethereum.request({
-
-                method:
-                    "wallet_addEthereumChain",
-
-                params: [
-
-                    {
-
-                        chainId:
-                            chainHex,
-
-                        chainName:
-                            CONFIG.CHAIN_NAME,
-
-                        nativeCurrency: {
-
-                            name:
-                                CONFIG.CURRENCY_SYMBOL,
-
-                            symbol:
-                                CONFIG.CURRENCY_SYMBOL,
-
-                            decimals:
-                                18
-
-                        },
-
-                        rpcUrls: [
-
-                            CONFIG.RPC_URL
-
-                        ],
-
-                        blockExplorerUrls: [
-
-                            CONFIG.EXPLORER_URL
-
-                        ]
-
-                    }
-
-                ]
-
-            });
-
-        } catch (addError) {
-
-            console.error(
-                addError
-            );
 
         }
 
@@ -148,190 +156,198 @@ try {
 
 }
 
-}
-
 async function updateWalletInfo() {
 
-if (
-    !window.ethereum
-) {
+    if (
+        !window.ethereum
+    ) {
 
-    return;
-
-}
-
-provider =
-    new ethers.providers.Web3Provider(
-        window.ethereum
-    );
-
-const accounts =
-    await provider.listAccounts();
-
-const connectBtn =
-    document.getElementById(
-        "connectBtn"
-    );
-
-const networkDiv =
-    document.getElementById(
-        "networkStatus"
-    );
-
-if (
-    accounts.length === 0
-) {
-
-    currentAccount =
-        null;
-
-    window.currentAccount =
-        null;
-
-    if (connectBtn) {
-
-        connectBtn.innerText =
-            "🫂Connect Wallet";
+        return;
 
     }
 
-    if (networkDiv) {
-
-        networkDiv.innerText =
-            "👤Wallet Not Connected";
-
-    }
-
-    return;
-
-}
-
-currentAccount =
-    accounts[0];
-
-window.currentAccount =
-    currentAccount;
-
-signer =
-    provider.getSigner();
-
-if (connectBtn) {
-
-    connectBtn.innerText =
-        shortenAddress(
-            currentAccount
+    provider =
+        new ethers.providers.Web3Provider(
+            window.ethereum
         );
 
-}
+    const accounts =
+        await provider.listAccounts();
 
-const chainId =
-    await window.ethereum.request({
+    const connectBtn =
+        document.getElementById(
+            "connectBtn"
+        );
 
-        method:
-            "eth_chainId"
+    const networkDiv =
+        document.getElementById(
+            "networkStatus"
+        );
 
-    });
+    if (
+        accounts.length === 0
+    ) {
 
-if (
+        currentAccount =
+            null;
 
-    parseInt(
-        chainId,
-        16
-    ) ===
+        window.currentAccount =
+            null;
 
-    CONFIG.CHAIN_ID
+        if (
+            connectBtn
+        ) {
 
-) {
+            connectBtn.innerText =
+                "Connect Wallet";
 
-    if (networkDiv) {
+        }
 
-        networkDiv.innerText =
-            "Connected";
+        if (
+            networkDiv
+        ) {
+
+            networkDiv.innerText =
+                "Wallet Not Connected";
+
+        }
+
+        return;
 
     }
 
-} else {
+    currentAccount =
+        accounts[0];
 
-    if (networkDiv) {
+    window.currentAccount =
+        currentAccount;
 
-        networkDiv.innerText =
-            "Unsupported Network";
+    signer =
+        provider.getSigner();
+
+    if (
+        connectBtn
+    ) {
+
+        connectBtn.innerText =
+            shortenAddress(
+                currentAccount
+            );
 
     }
 
-}
+    const chainId =
+        await window.ethereum.request({
 
-if (
+            method:
+                "eth_chainId"
 
-    typeof loadMyTokens ===
-    "function"
+        });
 
-) {
+    if (
 
-    await loadMyTokens();
+        parseInt(
+            chainId,
+            16
+        ) ===
 
-}
+        CONFIG.CHAIN_ID
 
-if (
+    ) {
 
-    typeof loadFactoryStats ===
-    "function"
+        if (
+            networkDiv
+        ) {
 
-) {
+            networkDiv.innerText =
+                "Connected to EVOZ Mainnet";
 
-    await loadFactoryStats();
+        }
 
-}
+    } else {
+
+        if (
+            networkDiv
+        ) {
+
+            networkDiv.innerText =
+                "Unsupported Network";
+
+        }
+
+    }
+
+    if (
+
+        typeof loadMyTokens ===
+        "function"
+
+    ) {
+
+        await loadMyTokens();
+
+    }
+
+    if (
+
+        typeof loadFactoryStats ===
+        "function"
+
+    ) {
+
+        await loadFactoryStats();
+
+    }
 
 }
 
 async function checkConnection() {
 
-try {
+    try {
 
-    await updateWalletInfo();
+        await updateWalletInfo();
 
-} catch (error) {
+    } catch (error) {
 
-    console.error(
-        error
-    );
+        console.error(
+            error
+        );
 
-}
+    }
 
 }
 
 window.addEventListener(
-"load",
-checkConnection
+    "load",
+    checkConnection
 );
 
 if (
-window.ethereum
+    window.ethereum
 ) {
 
-window.ethereum.on(
+    window.ethereum.on(
 
-    "accountsChanged",
+        "accountsChanged",
 
-    async () => {
+        async () => {
 
-        await updateWalletInfo();
+            await updateWalletInfo();
 
-    }
+        }
 
-);
+    );
 
-window.ethereum.on(
+    window.ethereum.on(
 
-    "chainChanged",
+        "chainChanged",
 
-    async () => {
+        async () => {
 
-        await updateWalletInfo();
+            await updateWalletInfo();
 
-    }
+        }
 
-);
+    );
 
 }
