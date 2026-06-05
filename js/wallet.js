@@ -203,7 +203,7 @@ async function updateWalletInfo() {
     ) {
 
         networkDiv.innerText =
-            "🟢 EVOZ Mainnet";
+            "EVOZ Mainnet";
 
     } else {
 
