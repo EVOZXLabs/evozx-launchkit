@@ -3,9 +3,11 @@ const CONFIG = {
     FACTORY_ADDRESS:
         "0x3F810a44D29a4f0fF7880641E69EBCBc076dA220",
 
-    CHAIN_ID: 805,
+    CHAIN_ID:
+        805,
 
-    CHAIN_NAME: "Evoz Mainnet",
+    CHAIN_NAME:
+        "EVOZ Mainnet",
 
     RPC_URL:
         "https://rpc.evozscan.com",
@@ -57,6 +59,7 @@ const FACTORY_ABI = [
         "name": "TokenCreated",
         "type": "event"
     },
+
     {
         "inputs": [
             {
@@ -101,6 +104,7 @@ const FACTORY_ABI = [
         "stateMutability": "view",
         "type": "function"
     },
+
     {
         "inputs": [
             {
@@ -130,6 +134,7 @@ const FACTORY_ABI = [
         "stateMutability": "nonpayable",
         "type": "function"
     },
+
     {
         "inputs": [
             {
@@ -174,6 +179,7 @@ const FACTORY_ABI = [
         "stateMutability": "view",
         "type": "function"
     },
+
     {
         "inputs": [],
         "name": "totalTokens",
