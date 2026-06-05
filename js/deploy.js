@@ -51,9 +51,12 @@ async function deployToken() {
         }
 
         document.getElementById(
-            "deployStatus"
-        ).innerText =
-            "Waiting for wallet confirmation...";
+    "deployStatus"
+).innerHTML =
+`
+<div class="loading"></div>
+Waiting for wallet confirmation...
+`;
 
         const provider =
             new ethers.providers.Web3Provider(
@@ -81,9 +84,12 @@ async function deployToken() {
             );
 
         document.getElementById(
-            "deployStatus"
-        ).innerText =
-            "Transaction sent...";
+    "deployStatus"
+).innerHTML =
+`
+<div class="loading"></div>
+Transaction sent...
+`;
 
         const receipt =
             await tx.wait();
@@ -131,9 +137,11 @@ async function deployToken() {
         }
 
         document.getElementById(
-            "deployStatus"
-        ).innerText =
-            "Token deployed successfully";
+    "deployStatus"
+).innerHTML =
+`
+✅ Token deployed successfully
+`;
 
         const verificationData = {
 
@@ -254,9 +262,11 @@ async function deployToken() {
         console.error(error);
 
         document.getElementById(
-            "deployStatus"
-        ).innerText =
-            error.message;
+    "deployStatus"
+).innerHTML =
+`
+❌ ${error.message}
+`;
 
     }
 
