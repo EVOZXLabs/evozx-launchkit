@@ -202,13 +202,15 @@ Transaction sent...
 
                 <br><br>
 
-                <a
-                    href="${CONFIG.EXPLORER_URL}/address/${tokenAddress}"
-                    target="_blank">
+                <button
+onclick="window.open(
+'${CONFIG.EXPLORER_URL}/address/${tokenAddress}',
+'_blank'
+)">
 
-                    Explorer
+Open Explorer
 
-                </a>
+</button>
 
             </div>
 
@@ -227,8 +229,14 @@ Transaction sent...
                 <br><br>
 
                 TX Hash:
-                <br>
-                ${receipt.transactionHash}
+<br>
+${receipt.transactionHash}
+
+<br><br>
+
+<button onclick="copyText('${receipt.transactionHash}')">
+    Copy TX Hash
+</button>
 
             </details>
 
@@ -257,6 +265,11 @@ Transaction sent...
 
         await loadMyTokens();
 
+        setTimeout(
+    loadMyTokens,
+    5000
+);
+        
     } catch (error) {
 
         console.error(error);
@@ -282,6 +295,28 @@ function copyTokenAddress(
 
     alert(
         "Address copied"
+    );
+
+}
+
+<br><br>
+
+<a
+href="${CONFIG.EXPLORER_URL}/tx/${receipt.transactionHash}"
+target="_blank">
+
+View Transaction
+
+</a>
+
+function copyText(text) {
+
+    navigator.clipboard.writeText(
+        text
+    );
+
+    alert(
+        "Copied"
     );
 
 }
