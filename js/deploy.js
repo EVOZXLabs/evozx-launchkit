@@ -342,7 +342,8 @@ function copyText(
 async function addTokenToWallet(
     tokenAddress,
     tokenSymbol
-) {try {
+) {
+    try {
 
         await window.ethereum.request({
 
@@ -680,7 +681,8 @@ async function loadMyTokens() {
         const total =
             await factory.totalTokens();
 
-        let html = "";for (
+        let html = "";
+        for (
             let i = Number(total) - 1;
             i >= 0;
             i--
