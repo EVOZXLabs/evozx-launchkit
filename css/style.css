@@ -632,3 +632,43 @@ header h1 {
     }
 
 }
+
+.hero-banner {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    display: block;
+
+    margin: 0 auto 20px auto;
+
+    border-radius: 16px;
+
+}
+
+.main-logo {
+
+    width: 120px;
+
+    display: block;
+
+    margin: -60px auto 15px auto;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+.evoz-mainnet-badge {
+
+    width: 100%;
+
+    max-width: 700px;
+
+    display: block;
+
+    margin: auto;
+
+}
