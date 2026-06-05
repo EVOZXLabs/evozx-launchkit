@@ -19,7 +19,7 @@ async function connectWallet() {
     if (!window.ethereum) {
 
         alert(
-            "No EVM wallet detected.\n\nPlease use TokenPocket, OKX Wallet, Bitget Wallet, Rabby, or MetaMask."
+            "⚠️No EVM wallet detected.\n\nPlease use TokenPocket, OKX Wallet, Bitget Wallet, Rabby, or MetaMask."
         );
 
         return;
@@ -203,7 +203,7 @@ async function updateWalletInfo() {
     ) {
 
         networkDiv.innerText =
-            "EVOZ Mainnet";
+            "🟢EVOZ Mainnet";
 
     } else {
 
