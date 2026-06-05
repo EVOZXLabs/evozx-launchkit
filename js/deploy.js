@@ -361,8 +361,25 @@ async function loadFactoryStats() {
         const total =
             await factory.totalTokens();
 
+        document.getElementById(
+    "totalTokensStat"
+).innerText =
+    total.toString();
+        
         let myTokenCount = 0;
 
+        const myTokenElement =
+    document.getElementById(
+        "myTokensStat"
+    );
+
+if (myTokenElement) {
+
+    myTokenElement.innerText =
+        myTokenCount;
+
+}
+        
 if (currentAccount) {
 
     for (
@@ -384,6 +401,20 @@ if (currentAccount) {
 
         ) {
 
+            if (
+
+    token.creator
+        .toLowerCase() ===
+
+    currentAccount
+        .toLowerCase()
+
+) {
+
+    myTokenCount++;
+
+            }
+            
             myTokenCount++;
 
         }
@@ -448,6 +479,13 @@ stats.innerHTML =
 </div>
 `;
 
+        if (myTokenElement) {
+
+    myTokenElement.innerText =
+        myTokenCount;
+
+        }
+        
         let html = "";
 
         const maxShow = 5;
