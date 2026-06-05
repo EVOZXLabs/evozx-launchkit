@@ -42,11 +42,6 @@ async function connectWallet() {
 
         await updateWalletInfo();
 
-        // refresh dashboard
-        if (typeof loadFactoryStats === "function") {
-            loadFactoryStats();
-        }
-
     } catch (error) {
 
         console.error(error);
@@ -168,6 +163,7 @@ async function updateWalletInfo() {
     if (accounts.length === 0) {
 
         currentAccount = null;
+        window.currentAccount = null;
 
         connectBtn.innerText =
             "Connect Wallet";
@@ -175,24 +171,15 @@ async function updateWalletInfo() {
         networkDiv.innerText =
             "⚪ Wallet Not Connected";
 
-        const myTokens =
-            document.getElementById(
-                "myTokens"
-            );
-
-        if (myTokens) {
-
-            myTokens.innerHTML =
-                "Connect wallet first";
-
-        }
-
         return;
 
     }
 
     currentAccount =
         accounts[0];
+
+    window.currentAccount =
+        currentAccount;
 
     signer =
         provider.getSigner();
@@ -225,9 +212,22 @@ async function updateWalletInfo() {
 
     }
 
-    // refresh data setelah wallet connect
-    if (typeof loadFactoryStats === "function") {
-        loadFactoryStats();
+    if (
+        typeof loadMyTokens ===
+        "function"
+    ) {
+
+        await loadMyTokens();
+
+    }
+
+    if (
+        typeof loadFactoryStats ===
+        "function"
+    ) {
+
+        await loadFactoryStats();
+
     }
 
 }
@@ -255,12 +255,20 @@ if (window.ethereum) {
 
     window.ethereum.on(
         "accountsChanged",
-        updateWalletInfo
+        async () => {
+
+            await updateWalletInfo();
+
+        }
     );
 
     window.ethereum.on(
         "chainChanged",
-        updateWalletInfo
+        async () => {
+
+            await updateWalletInfo();
+
+        }
     );
 
-                }
+}
