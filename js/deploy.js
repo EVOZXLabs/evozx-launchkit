@@ -669,11 +669,66 @@ ${data.symbol}
 
 SUPPLY
 ${data.supply}
+
+NETWORK
+${CONFIG.CHAIN_NAME}
+
+FACTORY
+${CONFIG.FACTORY_ADDRESS}
+
+RPC
+${CONFIG.RPC_URL}
+
+EXPLORER
+${CONFIG.EXPLORER_URL}
+`;
+
+    const compilerSettings = {
+
+        compilerVersion:
+            "0.8.24",
+
+        optimizer: {
+
+            enabled: true,
+
+            runs: 200
+
+        },
+
+        evmVersion:
+            "paris"
+
+    };
+
+    const constructorArguments =
+
+`name_ = ${data.name}
+
+symbol_ = ${data.symbol}
+
+supply_ = ${data.supply}
+
+creator_ = ${data.creator}
 `;
 
     zip.file(
         "verify-info.txt",
         verifyInfo
+    );
+
+    zip.file(
+        "compiler-settings.json",
+        JSON.stringify(
+            compilerSettings,
+            null,
+            2
+        )
+    );
+
+    zip.file(
+        "constructor-arguments.txt",
+        constructorArguments
     );
 
     const blob =
