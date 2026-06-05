@@ -1,12 +1,16 @@
 document
-    .getElementById("connectBtn")
+    .getElementById(
+        "connectBtn"
+    )
     .addEventListener(
         "click",
         connectWallet
     );
 
 document
-    .getElementById("deployBtn")
+    .getElementById(
+        "deployBtn"
+    )
     .addEventListener(
         "click",
         deployToken
