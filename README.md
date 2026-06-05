@@ -1,19 +1,28 @@
-<div align="center"><img src="img/evoz-banner.png">🚀 EVOZX Launch Kit
+<div align="center"><img src="img/evoz-banner.png" alt="EVOZX Launch Kit">EVOZX Launch Kit
 
 Token Launchpad for EVOZ Mainnet
 
-<img src="img/evoz-mainnet-badge.png"><br>"Version" (https://img.shields.io/badge/version-v1.0-blue)
-"Network" (https://img.shields.io/badge/network-EVOZ%20Mainnet-00c3ff)
-"Status" (https://img.shields.io/badge/status-Production%20Ready-success)
-"License" (https://img.shields.io/badge/license-MIT-green)
+<img src="img/evoz-mainnet-badge.png" alt="EVOZ Mainnet"><br>Deploy ERC20 Burnable Tokens directly on EVOZ Mainnet.
+
+No coding required.
+
+Wallet → Create → Deploy
 
 </div>---
 
-📖 Overview
+Launch Kit Preview
 
-EVOZX Launch Kit is a lightweight ERC20 token launchpad built specifically for the EVOZ Mainnet ecosystem.
+<p align="center">
+<img src="img/launchkit-preview.png" width="350">
+</p>---
 
-Users can deploy their own ERC20 tokens directly from a web interface using any EVM-compatible wallet such as:
+Overview
+
+EVOZX Launch Kit is a lightweight ERC20 token launchpad built for the EVOZ ecosystem.
+
+Users can create their own ERC20 Burnable tokens directly from a mobile or desktop wallet without writing Solidity code.
+
+Supported wallets:
 
 - TokenPocket
 - MetaMask
@@ -21,55 +30,44 @@ Users can deploy their own ERC20 tokens directly from a web interface using any 
 - Bitget Wallet
 - Rabby Wallet
 
-No coding required.
-
-Simply connect a wallet, enter token details, and deploy.
-
 ---
 
-📱 Launch Kit Preview
+Features
 
-<div align="center"><img src="img/launchkit-preview.png" width="350"></div>---
+Token Creation
 
-✨ Features
-
-Token Deployment
-
-- ERC20 Token Creation
-- Burnable Token Support
+- ERC20 Standard
+- ERC20 Burnable
 - Instant Deployment
 - Creator Receives Full Supply
 
 Wallet Integration
 
-- TokenPocket Support
-- MetaMask Support
-- OKX Wallet Support
-- Bitget Wallet Support
-- Rabby Wallet Support
+- Connect Wallet
+- Auto Network Switch
+- EVOZ Mainnet Support
 
 Explorer Integration
 
-- Direct Explorer Links
-- Transaction Links
 - Token Contract Links
+- Transaction Links
+- Explorer Navigation
 
 Statistics
 
-- Factory Statistics
-- Total Tokens Counter
-- User Token Counter
+- Total Factory Tokens
+- Your Factory Tokens
 - Recent Deployments
 
 Mobile Friendly
 
+- Android Support
+- iOS Support
 - Responsive UI
-- Android Compatible
-- iOS Compatible
 
 ---
 
-🌐 Network Information
+Network Information
 
 EVOZ Mainnet
 
@@ -81,7 +79,7 @@ Chain ID
 
 805
 
-RPC URL
+RPC
 
 https://rpc.evozscan.com
 
@@ -95,32 +93,14 @@ EVOZ
 
 ---
 
-🏗 Factory Architecture
+Token Standard
 
-The Launch Kit uses a Factory Contract pattern.
-
-User
-  │
-  ▼
-Token Factory
-  │
-  ├── Token A
-  ├── Token B
-  ├── Token C
-  └── ...
-
-Each token is deployed as an independent ERC20 smart contract.
-
----
-
-🔥 Token Standard
-
-Generated tokens include:
+Generated tokens are based on:
 
 ERC20
 ERC20Burnable
 
-Supported Functions:
+Supported functions:
 
 - transfer()
 - approve()
@@ -130,86 +110,48 @@ Supported Functions:
 
 ---
 
-📂 Repository Structure
+Project Structure
 
 EVOZX-LaunchKit
 │
 ├── index.html
-│
-├── css
-│   └── style.css
-│
-├── js
-│   ├── config.js
-│   ├── wallet.js
-│   ├── deploy.js
-│   └── stats.js
-│
-├── img
-│   ├── logo.png
-│   ├── evoz-banner.png
-│   ├── evoz-mainnet-badge.png
-│   └── launchkit-preview.png
-│
+├── css/
+├── js/
+├── img/
 └── README.md
 
 ---
 
-🚀 Quick Start
-
-Clone repository:
-
-git clone https://github.com/EVOZXLabs/EVOZX-LaunchKit.git
-
-Open project:
-
-cd EVOZX-LaunchKit
-
-Run locally:
-
-index.html
-
-Or deploy directly using GitHub Pages.
-
----
-
-🌍 Live Demo
-
-GitHub Pages
+Live Demo
 
 https://evozxlabs.github.io/EVOZX-LaunchKit/
 
 ---
 
-📊 Current Status
+Status
 
 Component| Status
 Wallet Connect| ✅
 Token Deployment| ✅
-Factory Stats| ✅
+Factory Statistics| ✅
 Recent Deployments| ✅
-Explorer Links| ✅
 Mobile UI| ✅
 GitHub Pages| ✅
-Verification Package| 🔄
 
 ---
 
-🛣 Roadmap
+Roadmap
 
 V1 Stable
 
-- ERC20 Deployment
-- Burnable Tokens
-- Factory Statistics
-- Mobile UI
+- ERC20 Burnable Factory
 - Wallet Integration
+- Mobile UI
+- Statistics Dashboard
 
 V2
 
 - Verification Package Generator
-- One-Click Verification
-- Token Metadata Generator
 - Factory Analytics
 - Token Search
 
@@ -217,40 +159,20 @@ V3
 
 - Liquidity Launcher
 - Presale Module
-- Staking Module
 - Token Locker
 
 ---
 
-🔒 Security
-
-- OpenZeppelin ERC20
-- OpenZeppelin ERC20Burnable
-- Solidity 0.8.x
-- No Owner Privileges
-- No Mint Function
-- No Hidden Fees
-
----
-
-📜 License
+License
 
 MIT License
-
-Free to use, modify and distribute.
-
----
-
-👨‍💻 Developed By
-
-EVOZX Labs
-
-Building tools for the EVOZ ecosystem.
 
 ---
 
 <div align="center">Powered by EVOZX Labs
 
-© 2026 EVOZX Labs. All Rights Reserved.
+Building the Future of EVOZ Ecosystem
+
+© 2026 EVOZX Labs
 
 </div>
