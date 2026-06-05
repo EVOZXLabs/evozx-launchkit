@@ -6,7 +6,7 @@
 
 body {
 
-    background: #0f172a;
+    background: #000000;
 
     color: #ffffff;
 
@@ -22,10 +22,12 @@ body {
 
 .container {
 
-    max-width: 800px;
+    max-width: 900px;
 
     margin: auto;
 }
+
+/* HEADER */
 
 header {
 
@@ -34,41 +36,110 @@ header {
     margin-bottom: 25px;
 }
 
+.hero-banner {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    display: block;
+
+    margin: 0 auto 20px auto;
+
+    border-radius: 18px;
+
+    border: 1px solid #1e293b;
+
+    box-shadow:
+        0 0 30px
+        rgba(
+            56,
+            189,
+            248,
+            0.08
+        );
+}
+
 header h1 {
 
-    font-size: 32px;
+    font-size: 34px;
+
+    color: #38bdf8;
 
     margin-bottom: 10px;
 
-    color: #38bdf8;
+    font-weight: 700;
 }
 
 header p {
 
-    color: #cbd5e1;
+    color: #94a3b8;
+
+    font-size: 15px;
 }
+
+/* NETWORK BADGE */
+
+.evoz-mainnet-badge {
+
+    width: 100%;
+
+    max-width: 720px;
+
+    display: block;
+
+    margin: 0 auto 22px auto;
+
+    border-radius: 14px;
+}
+
+/* CARDS */
 
 .card {
 
-    background: #1e293b;
+    background: #0b0b0b;
 
-    border: 1px solid #334155;
+    border: 1px solid #1e293b;
 
-    border-radius: 14px;
+    border-radius: 16px;
 
-    padding: 20px;
+    padding: 22px;
 
     margin-bottom: 18px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.card:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color: #38bdf8;
+
+    box-shadow:
+        0 0 24px
+        rgba(
+            56,
+            189,
+            248,
+            0.08
+        );
 }
 
 .card h2 {
 
+    color: #38bdf8;
+
     margin-bottom: 15px;
 
     font-size: 20px;
-
-    color: #38bdf8;
 }
+
+/* INPUTS */
 
 input {
 
@@ -78,13 +149,13 @@ input {
 
     margin-bottom: 12px;
 
-    border: 1px solid #475569;
-
     border-radius: 10px;
 
-    background: #0f172a;
+    border: 1px solid #334155;
 
-    color: white;
+    background: #050505;
+
+    color: #ffffff;
 
     font-size: 15px;
 }
@@ -95,6 +166,8 @@ input:focus {
 
     border-color: #38bdf8;
 }
+
+/* BUTTONS */
 
 button {
 
@@ -108,11 +181,11 @@ button {
 
     background: #38bdf8;
 
-    color: #0f172a;
+    color: #000000;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    font-weight: bold;
+    font-weight: 700;
 
     cursor: pointer;
 
@@ -121,13 +194,15 @@ button {
 
 button:hover {
 
-    opacity: 0.9;
+    opacity: 0.92;
 }
 
 button:active {
 
     transform: scale(0.98);
 }
+
+/* LINKS */
 
 a {
 
@@ -141,6 +216,8 @@ a:hover {
     text-decoration: underline;
 }
 
+/* STATUS */
+
 #deployStatus {
 
     margin-top: 15px;
@@ -152,18 +229,6 @@ a:hover {
     word-break: break-word;
 }
 
-#tokenResult {
-
-    word-break: break-word;
-}
-
-#factoryStats {
-
-    text-align: center;
-
-    font-size: 15px;
-}
-
 #networkStatus {
 
     text-align: center;
@@ -171,52 +236,79 @@ a:hover {
     color: #cbd5e1;
 }
 
-.info-card {
+#tokenResult {
 
-    text-align: center;
+    word-break: break-word;
 }
 
-.network-badge {
+/* DASHBOARD */
 
-    display: inline-block;
+.stats-grid {
 
-    background: #0f172a;
+    display: grid;
 
-    border: 1px solid #38bdf8;
+    grid-template-columns:
+        repeat(
+            3,
+            1fr
+        );
 
-    color: #38bdf8;
+    gap: 12px;
 
-    padding: 10px 18px;
+    margin-bottom: 20px;
+}
 
-    border-radius: 999px;
+.stat-box {
 
-    font-size: 14px;
+    background: #0b0b0b;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.stat-box:hover {
+
+    border-color: #38bdf8;
+}
+
+.stat-value {
+
+    font-size: 26px;
 
     font-weight: bold;
 
-    margin-bottom: 12px;
+    color: #38bdf8;
 }
 
-.support-text {
+.stat-label {
+
+    margin-top: 8px;
 
     color: #94a3b8;
 
-    font-size: 14px;
+    font-size: 13px;
 }
 
 /* TOKEN CARD */
 
 .token-card {
 
-    background: #0f172a;
+    background: #050505;
 
-    border: 1px solid #334155;
+    border: 1px solid #1e293b;
 
-    border-radius: 12px;
+    border-radius: 14px;
 
-    padding: 15px;
+    padding: 16px;
 
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
 .token-symbol {
@@ -225,7 +317,7 @@ a:hover {
 
     background: #38bdf8;
 
-    color: #0f172a;
+    color: #000000;
 
     font-weight: bold;
 
@@ -270,9 +362,11 @@ details {
 
     margin-top: 10px;
 
-    border-top: 1px solid #334155;
+    border-top: 1px solid #1e293b;
 
     padding-top: 10px;
+
+    color: #cbd5e1;
 }
 
 summary {
@@ -282,144 +376,108 @@ summary {
     color: #38bdf8;
 
     font-weight: bold;
+    }
+
+/* FACTORY STATS */
+
+#factoryStats {
+
+    text-align: center;
 }
 
-summary:hover {
+/* INFO CARD */
 
-    opacity: 0.9;
+.info-card {
+
+    text-align: center;
 }
+
+.support-text {
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+/* LOADING SPINNER */
+
+.loading {
+
+    width: 18px;
+
+    height: 18px;
+
+    display: inline-block;
+
+    vertical-align: middle;
+
+    margin-right: 8px;
+
+    border-radius: 50%;
+
+    border: 3px solid #1e293b;
+
+    border-top: 3px solid #38bdf8;
+
+    animation:
+        spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+    from {
+
+        transform:
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+/* DIVIDER */
 
 hr {
 
     border: none;
 
-    border-top: 1px solid #334155;
+    border-top: 1px solid #1e293b;
 
-    margin: 10px 0;
+    margin: 12px 0;
 }
 
-@media (max-width: 600px) {
+/* SCROLLBAR */
 
-    body {
+::-webkit-scrollbar {
 
-        padding: 12px;
-    }
-
-    header h1 {
-
-        font-size: 26px;
-    }
-
-    .card {
-
-        padding: 16px;
-    }
-
-    button {
-
-        font-size: 15px;
-    }
-
-    .token-name {
-
-        font-size: 16px;
-    }
+    width: 10px;
 
 }
 
-.main-logo {
+::-webkit-scrollbar-track {
 
-    width: 220px;
-
-    max-width: 90%;
-
-    height: auto;
-
-    margin-bottom: 15px;
-
-    filter:
-        drop-shadow(
-            0 0 15px
-            rgba(56,189,248,.5)
-        );
-}
-
-/* LOGO */
-
-.main-logo {
-
-    width: 110px;
-
-    display: block;
-
-    margin: 15px auto 20px;
-
-    filter:
-        drop-shadow(
-            0 0 12px
-            rgba(
-                56,
-                189,
-                248,
-                0.35
-            )
-        );
-
-    animation:
-        logoFloat
-        4s
-        ease-in-out
-        infinite;
-}
-
-@keyframes logoFloat {
-
-    0% {
-        transform:
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            translateY(-6px);
-    }
-
-    100% {
-        transform:
-            translateY(0);
-    }
+    background: #050505;
 
 }
 
-/* HEADER */
+::-webkit-scrollbar-thumb {
 
-header {
+    background: #1e293b;
 
-    padding-top: 10px;
+    border-radius: 20px;
+
 }
 
-/* CARD EFFECT */
+::-webkit-scrollbar-thumb:hover {
 
-.card {
+    background: #38bdf8;
 
-    transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-}
-
-.card:hover {
-
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 0 20px
-        rgba(
-            56,
-            189,
-            248,
-            0.10
-        );
 }
 
 /* FOOTER */
@@ -433,242 +491,188 @@ footer {
     color: #64748b;
 
     font-size: 13px;
+
+    padding-bottom: 10px;
 }
 
-/* DASHBOARD STATS */
+/* MOBILE */
 
-.stats-grid {
+@media (max-width: 768px) {
 
-    display: grid;
+    body {
 
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(
-                150px,
+        padding: 12px;
+
+    }
+
+    .container {
+
+        width: 100%;
+
+    }
+
+    header h1 {
+
+        font-size: 28px;
+
+    }
+
+    header p {
+
+        font-size: 14px;
+
+    }
+
+    .card {
+
+        padding: 18px;
+
+    }
+
+    .stats-grid {
+
+        grid-template-columns:
+            repeat(
+                3,
                 1fr
-            )
+            );
+
+        gap: 8px;
+
+    }
+
+    .stat-box {
+
+        padding: 12px;
+
+    }
+
+    .stat-value {
+
+        font-size: 18px;
+
+    }
+
+    .stat-label {
+
+        font-size: 11px;
+
+    }
+
+    .token-name {
+
+        font-size: 16px;
+
+    }
+
+    button {
+
+        font-size: 14px;
+
+        padding: 13px;
+
+    }
+
+    .hero-banner {
+
+        border-radius: 14px;
+
+    }
+
+    .evoz-mainnet-badge {
+
+        margin-bottom: 18px;
+
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    header h1 {
+
+        font-size: 24px;
+
+    }
+
+    .stats-grid {
+
+        gap: 6px;
+
+    }
+
+    .stat-box {
+
+        padding: 10px;
+
+    }
+
+    .stat-value {
+
+        font-size: 16px;
+
+    }
+
+    .stat-label {
+
+        font-size: 10px;
+
+    }
+
+}
+
+/* POLISHED BLACK THEME */
+
+body {
+
+    background:
+        radial-gradient(
+            circle at top,
+            #0b1220 0%,
+            #000000 45%
         );
 
-    gap: 15px;
-
-    margin-top: 10px;
 }
 
-.stat-box {
-
-    background: #0f172a;
-
-    border: 1px solid #334155;
-
-    border-radius: 12px;
-
-    padding: 20px;
-
-    text-align: center;
-
-    transition: 0.2s;
-}
-
-.stat-box:hover {
-
-    border-color: #38bdf8;
-
-    transform: translateY(-2px);
-}
-
-.stat-value {
-
-    font-size: 28px;
-
-    font-weight: bold;
-
-    color: #38bdf8;
-
-    margin-bottom: 8px;
-}
-
-.stat-label {
-
-    color: #94a3b8;
-
-    font-size: 14px;
-}
-
-/* LOGO */
-
-.main-logo {
-
-    width: 110px;
-
-    height: auto;
-
-    display: block;
-
-    margin: 0 auto 15px auto;
-}
-
-/* HEADER */
-
-header {
-
-    text-align: center;
-
-    margin-bottom: 25px;
-}
-
-header h1 {
-
-    margin-top: 5px;
-}
-
-/* CARD HOVER */
-
-.card {
-
-    transition: 0.2s;
-}
+/* SUBTLE GLOW */
 
 .card:hover {
 
-    border-color: #38bdf8;
-}
-
-.stats-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 12px;
-
-    margin-bottom: 20px;
-}
-
-.stat-box {
-
-    background: #1e293b;
-
-    border: 1px solid #334155;
-
-    border-radius: 14px;
-
-    padding: 18px;
-
-    text-align: center;
-}
-
-.stat-value {
-
-    font-size: 24px;
-
-    font-weight: bold;
-
-    color: #38bdf8;
-}
-
-.stat-label {
-
-    margin-top: 8px;
-
-    color: #94a3b8;
-
-    font-size: 13px;
-}
-
-@media(max-width:600px){
-
-    .stats-grid{
-
-        grid-template-columns:
-            repeat(3,1fr);
-
-    }
-
-    .stat-value{
-
-        font-size:18px;
-
-    }
-
-}
-
-/* DEPLOY LOADING */
-
-.loading {
-
-    width: 18px;
-
-    height: 18px;
-
-    border: 3px solid #334155;
-
-    border-top: 3px solid #38bdf8;
-
-    border-radius: 50%;
-
-    animation: spin 1s linear infinite;
-
-    display: inline-block;
-
-    margin-right: 8px;
-
-    vertical-align: middle;
-}
-
-@keyframes spin {
-
-    from {
-
-        transform: rotate(0deg);
-
-    }
-
-    to {
-
-        transform: rotate(360deg);
-
-    }
-
+    box-shadow:
+        0 0 20px rgba(
+            56,
+            189,
+            248,
+            0.08
+        ),
+        0 0 40px rgba(
+            56,
+            189,
+            248,
+            0.03
+        );
 }
 
 .hero-banner {
 
-    width: 100%;
-
-    max-width: 1000px;
-
-    display: block;
-
-    margin: 0 auto 20px auto;
-
-    border-radius: 16px;
-
-}
-
-.main-logo {
-
-    width: 120px;
-
-    display: block;
-
-    margin: -60px auto 15px auto;
-
-    position: relative;
-
-    z-index: 2;
-
+    box-shadow:
+        0 0 30px rgba(
+            56,
+            189,
+            248,
+            0.08
+        );
 }
 
 .evoz-mainnet-badge {
 
-    width: 100%;
-
-    max-width: 700px;
-
-    display: block;
-
-    margin: auto;
-
+    filter:
+        drop-shadow(
+            0 0 12px rgba(
+                56,
+                189,
+                248,
+                0.15
+            )
+        );
 }
