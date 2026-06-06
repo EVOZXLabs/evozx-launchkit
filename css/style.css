@@ -855,15 +855,21 @@ body {
 
 .stock-box {
 
-    background: #050505;
+    text-align: center;
 
-    border: 1px solid #1e293b;
+    color: #475569;
 
-    border-radius: 12px;
+    font-size: 10px;
 
-    padding: 12px;
+    letter-spacing: 0.5px;
 
-    margin-top: 10px;
+    border: none;
+
+    background: transparent;
+
+    padding: 0;
+
+    margin-top: 8px;
 
 }
 
@@ -997,7 +1003,7 @@ body {
 
 #buyBtn {
 
-    font-size: 17px;
+    font-size: 18px;
 
     font-weight: 800;
 
