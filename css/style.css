@@ -676,3 +676,119 @@ body {
             )
         );
 }
+
+/* =========================================
+   EVOZX EXCHANGE
+========================================= */
+
+.exchange-rate {
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(56,189,248,0.12),
+            rgba(56,189,248,0.03)
+        );
+
+    border: 1px solid #1e293b;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #38bdf8;
+
+}
+
+#receiveAmount {
+
+    background: #050505;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #ffffff;
+
+}
+
+#exchangeStock {
+
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+}
+
+#exchangeStatus {
+
+    text-align: center;
+
+    color: #cbd5e1;
+
+    margin-top: 10px;
+
+    word-break: break-word;
+
+}
+
+#buyBtn {
+
+    background:
+        linear-gradient(
+            135deg,
+            #38bdf8,
+            #0ea5e9
+        );
+
+    color: #000000;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 0 20px rgba(
+            56,
+            189,
+            248,
+            0.15
+        );
+
+}
+
+#buyBtn:hover {
+
+    box-shadow:
+        0 0 25px rgba(
+            56,
+            189,
+            248,
+            0.25
+        );
+
+}
+
+.exchange-card {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+}
