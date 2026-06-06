@@ -181,23 +181,11 @@ const EXCHANGE_ABI = [
         "outputs": [],
         "stateMutability": "payable",
         "type": "function"
-    }
-
-];
-
-/* ERC20 */
-
-const ERC20_ABI = [
+    },
 
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "account",
-                "type": "address"
-            }
-        ],
-        "name": "balanceOf",
+        "inputs": [],
+        "name": "getAvailableStock",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -211,12 +199,26 @@ const ERC20_ABI = [
 
     {
         "inputs": [],
-        "name": "decimals",
+        "name": "rate",
         "outputs": [
             {
-                "internalType": "uint8",
+                "internalType": "uint256",
                 "name": "",
-                "type": "uint8"
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+
+    {
+        "inputs": [],
+        "name": "paused",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
             }
         ],
         "stateMutability": "view",
