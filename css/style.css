@@ -792,3 +792,77 @@ body {
     gap: 12px;
 
 }
+
+/* =========================================
+   EVOZX WALLET ADD BUTTON
+========================================= */
+
+.add-wallet-btn {
+
+    background:
+        linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+        );
+
+    color: #ffffff;
+
+    margin-top: 10px;
+
+}
+
+.add-wallet-btn:hover {
+
+    opacity: 0.95;
+
+}
+
+/* =========================================
+   EXCHANGE SUCCESS BOX
+========================================= */
+
+.exchange-success {
+
+    background:
+        rgba(
+            34,
+            197,
+            94,
+            0.08
+        );
+
+    border:
+        1px solid
+        rgba(
+            34,
+            197,
+            94,
+            0.25
+        );
+
+    border-radius: 12px;
+
+    padding: 14px;
+
+    margin-top: 12px;
+
+}
+
+/* =========================================
+   STOCK BOX
+========================================= */
+
+.stock-box {
+
+    background: #050505;
+
+    border: 1px solid #1e293b;
+
+    border-radius: 12px;
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+}
